@@ -126,7 +126,169 @@ class Cabs
 };
 
 class Booking
-{};
+{
+ private:
+    int choiceHotel;
+    int packChoice;
+    float hotelCost;
+  public:
+    void hotels()
+     {
+      string hotelNo[]={"Avendra", "ChoiceYou", "ElephantBay",};
+      for(int i=0 ; i<3; i++)
+       {
+        cout<<(i+1)<<". Hotel"<<hotelNo[i]<<endl;
+       }
+        cout<<"\nCurrently we collaborated with above hotels!"<<endl;
+
+        cout<<"Press any key to back or\nEnter number of the hotel you want to book: ";
+        cin>> choiceHotel;
+
+        system("cls");
+
+        if(choiceHotel == 1)
+         {
+           cout<<"-------WELCOME TO HOTEL AVENDRA-------\n"<<endl;
+           cout<<"The Garden, food and beverage. Enjoy all you can drink. stay cool and get chilled in the summer sun."<<endl;
+           cout<<"Packages offered by Avendra:\n"<<endl;
+           cout<<"1. Standard Pack"<<endl;
+           cout<<"\tAll basic facilities you need just for: Rs.5000.00"<<endl;
+           cout<<"2. Premium Pack"<<endl;
+           cout<<"\tEnjoy Premium: Rs.10000.00"<<endl;
+           cout<<"3. Luxury Pack"<<endl;
+           cout<<"\tLive a Luxury at avendra: Rs.15000.00"<<endl;
+           cout<<"\nPress another key to back or \nEnter package number you want to book: ";
+           cin>>packChoice;
+            
+            switch (packChoice)
+            {
+            case 1:
+              hotelCost=5000.00;
+              cout<<"\nYou have successfully booked Standard Pack at Avendra"<<endl;
+              cout<<"\nGoto Menu and take the receipt"<<endl;
+              break;
+            case 2:
+              hotelCost=1000.00;
+              cout<<"\nYou have successfully booked Premium Pack at Avendra"<<endl;
+              cout<<"\nGoto Menu and take the receipt"<<endl;
+              break;
+            case 3:
+              hotelCost=15000.00;
+              cout<<"\nYou have successfully booked Luxury Pack at Avendra"<<endl; 
+              cout<<"\nGoto Menu and take the receipt"<<endl;
+              break;
+            default:
+              cout<<"Invalid Input! Redirecting to Previous Menu \nPlease Wait!"<<endl;
+              Sleep(1100);
+              system("cls");
+              hotels();
+            }
+              int gotomenu;            
+              cout<<"\nPress 1 to redirect main menu:";
+              cin>>gotomenu;
+              if(gotomenu==1)
+               {
+                //menu();
+               }
+              else 
+               {
+                //menu();
+               }
+         }
+
+        else if(choiceHotel == 2)
+         {
+           cout<<"-------WELCOME TO HOTEL CHOICEYOU-------\n"<<endl;
+           cout<<"The Garden, food and beverage. Enjoy all you can drink. stay cool and get chilled in the summer sun."<<endl;
+           cout<<"Packages offered by ChoiceYou:\n"<<endl;
+           cout<<"1. Family Pack"<<endl;
+           cout<<"\tAll basic facilities you need just for: Rs.5000.00"<<endl;
+           cout<<"2. Couple Pack"<<endl;
+           cout<<"\tEnjoy Premium: Rs.10000.00"<<endl;
+           cout<<"3. Single Pack"<<endl;
+           cout<<"\tLive a Luxury at ChoiceYou: Rs.15000.00"<<endl;
+           cout<<"\nPress another key to back or \nEnter package number you want to book: ";
+           cin>>packChoice;
+            
+            switch (packChoice)
+            {
+            case 3:
+              hotelCost=5000.00;
+              cout<<"\nYou have successfully booked Single Pack at ChoiceYou"<<endl;
+              cout<<"\nGoto Menu and take the receipt"<<endl;
+              break;
+            case 2:
+              hotelCost=1000.00;
+              cout<<"\nYou have successfully booked Couple Pack at ChoiceYou"<<endl;
+              cout<<"\nGoto Menu and take the receipt"<<endl;
+              break;
+            case 1:
+              hotelCost=15000.00;
+              cout<<"\nYou have successfully booked Family Pack at ChoiceYou"<<endl; 
+              cout<<"\nGoto Menu and take the receipt"<<endl;
+              break;
+            default:
+              cout<<"Invalid Input! Redirecting to Previous Menu \nPlease Wait!"<<endl;
+              Sleep(1100);
+              system("cls");
+              hotels();
+            }
+              int gotomenu;            
+              cout<<"\nPress 1 to redirect main menu:";
+              cin>>gotomenu;
+              if(gotomenu==1)
+               {
+                //menu();
+               }
+              else 
+               {
+                //menu();
+               }
+         }
+        else if(choiceHotel == 3)
+         {
+           cout<<"-------WELCOME TO HOTEL ELEPHANTBAY-------\n"<<endl;
+           cout<<"The Garden, food and beverage. Enjoy all you can drink. stay cool and get chilled in the summer sun."<<endl;
+           cout<<"Packages offered by ElephantBay:\n"<<endl;
+           cout<<"1. Family Pack"<<endl;
+           cout<<"\tAmazing offer in this summer just for: Rs.5000.00  for a one day!!! \2"<<endl;
+
+           cout<<"\nPress another key to back or \nEnter package number you want to book: ";
+           cin>>packChoice;
+            
+            switch (packChoice)
+            {
+            case 1:
+              hotelCost=5000.00;
+              cout<<"\nYou have successfully booked Single Pack at ElephantBay"<<endl;
+              cout<<"\nGoto Menu and take the receipt"<<endl;
+              break;
+
+            default:
+              cout<<"Invalid Input! Redirecting to Previous Menu \nPlease Wait!"<<endl;
+              Sleep(1100);
+              system("cls");
+              hotels();
+            }
+              int gotomenu;            
+              cout<<"\nPress 1 to redirect main menu:";
+              cin>>gotomenu;
+              if(gotomenu==1)
+               {
+                //menu();
+               }
+              else 
+               {
+                //menu();
+               }
+         }
+        else
+         {
+          hotels();
+         }
+      }  
+
+};
 
 class Charges
 {};
