@@ -8,14 +8,38 @@
 
 using namespace std;
 
+void menu();
+
+class ManageMenu
+ {
+  protected:
+    string userName;
+  public:
+   ManageMenu()
+    {
+       system("color 0A");
+       cout<<"\n\n\n\n\n\n\n\n\n\t  Enter Your Name to Continue as an Admin: ";
+       cin>> userName;
+       system("cls");
+       menu();
+    }
+   ~ManageMenu()
+    {
+       
+    }
+ };
+
 class Customers
 {
   private:
    string name , gender , address;
-   int age , mobileNo , cusID;
-   char all[999];
+   int age , mobileNo ;
+   
+  protected:
+   int cusID;
+   char all[999]; 
   public:
-   void detDetails()
+   void getDetails()
     {
       ofstream out("old-customers.txt" , ios::app );
        {
@@ -23,6 +47,8 @@ class Customers
         cin>>cusID;
         cout<<"Enter Name : ";
         cin>>name;
+        cout<<"Enter Age : ";
+        cin>>age;
         cout<<"Enter Mobile Number : ";
         cin>>mobileNo;
         cout<<"Enter Address : ";
@@ -59,8 +85,8 @@ class Cabs
     int cabChoice;
     int kilometers;
     float cabCost;
-    float lastcabCost;
-    
+  protected:
+    static float lastcabCost;
   public:
     void cabDetails()
      {
@@ -109,28 +135,31 @@ class Cabs
           cout<<"Invalid Input ! Redirecting to Main Menu \n Please Wait!"<<endl;
           Sleep(1100);
           system("cls");
-          //menu();
+          menu();
         }
           cout<<"\nPress 1 to Redirect Main Menu: ";
           cin>>hireCab;
           system("cls");
           if(hireCab==1)
            {
-            //menu(); 
+            menu(); 
            }
           else
            {
-            //menu();
+            menu();
            }
      }
 };
+
+float Cabs::lastcabCost;/**/
 
 class Booking
 {
  private:
     int choiceHotel;
-    int packChoice;
-    float hotelCost;
+    int packChoice;  
+  protected:
+     static float hotelCost; 
   public:
     void hotels()
      {
@@ -188,11 +217,11 @@ class Booking
               cin>>gotomenu;
               if(gotomenu==1)
                {
-                //menu();
+                menu();
                }
               else 
                {
-                //menu();
+                menu();
                }
          }
 
@@ -238,11 +267,11 @@ class Booking
               cin>>gotomenu;
               if(gotomenu==1)
                {
-                //menu();
+                menu();
                }
               else 
                {
-                //menu();
+                menu();
                }
          }
         else if(choiceHotel == 3)
@@ -275,11 +304,11 @@ class Booking
               cin>>gotomenu;
               if(gotomenu==1)
                {
-                //menu();
+                menu();
                }
               else 
                {
-                //menu();
+                menu();
                }
          }
         else
@@ -290,11 +319,167 @@ class Booking
 
 };
 
-class Charges
-{};
+float Booking::hotelCost;/**/
 
+class Charges : public Booking, Cabs, Customers
+{
+  public:
+   void printBill()
+    {
+      ofstream outf("receipt.txt");
+       {
+         outf<< "--------ABC Travel Agency--------"<< endl;
+         outf<< "-------------Receipt-------------"<< endl;
+         outf<< "_________________________________"<< endl;
+
+         outf<< "Customer ID: " <<Customers::cusID <<endl<< endl;
+         outf<< "Description\t\t Total"<<endl; 
+         outf<< "Hotel cost:\t\t "<< fixed <<setprecision(2) <<Booking::hotelCost <<endl;
+         outf<< "Travel (cab) cost:\t " << fixed <<setprecision(2) <<Cabs::lastcabCost <<endl;
+
+         outf<< "_________________________________"<< endl;
+         outf<< "Total Charge:\t\t " << fixed <<setprecision(2) <<Booking::hotelCost+Cabs::lastcabCost << endl;
+         outf<< "_________________________________"<< endl;
+         outf<< "------------THANK YOU------------"<< endl;
+       }
+       outf.close();
+    }
+   void showBill()
+    {
+      ifstream inf("receipt.txt");
+       {
+        if(!inf)
+         {
+           cout<< " File opening error!" << endl;
+         }
+         while(!(inf.eof()))
+          {
+            inf.getline(all, 999);
+            cout<<all<<endl;
+          }
+       }
+       inf.close();
+    }  
+};
+
+void menu()
+ {
+   int mainChoice , inChoice , gotoMenu;
+
+   cout<<"\t     * ABC Travels *\n" << endl;
+   cout<<"----------------------Main Menu----------------------"<<endl;
+   cout<<"\t _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ "<<endl;
+   cout<<"\t|\t\t\t\t\t|" <<endl;
+   cout<<"\t|\tCustomer Management -> 1\t|" <<endl;
+   cout<<"\t|\tCabs Management     -> 2\t|" <<endl;
+   cout<<"\t|\tBookings Management -> 3\t|" <<endl;
+   cout<<"\t|\tCharges & Bill      -> 4\t|" <<endl;
+   cout<<"\t|\tExit                -> 5\t|" <<endl;
+   cout<<"\t|\t\t\t\t\t|" <<endl;
+   cout<<"\t|_ _ _ _ _ _ _ _ _ _ _ _ _ _ _  _ _ _ _|" <<endl;
+
+   cout<< "\nEnter Your Choice: ";
+   cin>> mainChoice;
+
+   system("cls");
+   Customers a2;
+   Cabs a3;
+   Booking a4;
+   Charges a5;
+
+   if(mainChoice==1)
+    {
+      cout<<"------Customers------\n" <<endl;
+      cout<<"1. Enter New Customer" <<endl;
+      cout<<"2. See Old Customers" <<endl;
+      cout<<"\nEnter Choice: ";
+      cin>>inChoice;
+      system("cls");
+      if(inChoice == 1)
+       {
+        a2.getDetails();
+       }
+      else if(inChoice ==2)
+       {
+        a2.showDetails();
+       } 
+      else
+       {
+        cout<<"Invalid Input! Redirecting to Previous Menu \nPlease Wait!" <<endl;
+        Sleep(1100);
+        system("cls");
+        menu();
+       } 
+
+       cout<<"\nPress 1 to Redirect main menu: ";
+       cin>>gotoMenu;
+       system("cls");
+       if(gotoMenu == 1)
+        {
+         menu();
+        }
+       else
+        {
+          menu();
+        } 
+    }
+   else if(mainChoice==2)
+    {
+      a3.cabDetails();
+    }    
+   else if(mainChoice==3)
+    {
+      cout<<"--> Book a Luxury Hotel using the system <--" <<endl;
+      a4.hotels();
+    } 
+   else if(mainChoice==4)
+    {
+      cout<<"--> Get your receipt <--"  <<endl;
+      a5.printBill();
+
+      cout<<"Your reeipt is already printed you can get it from file path\n" <<endl;
+      cout<<"to display the your receipt in the screen, Enter 1: or Enter another key to back main menu: ";
+      cin>>gotoMenu;
+      if(gotoMenu==1)
+       {
+         system("cls");
+         a5.showBill();
+         cout<<"\nPress 1 to redirect main menu: ";
+         cin>>gotoMenu;
+         system("cls");
+         if(gotoMenu==1)
+          {
+            menu();
+          }
+         else
+          {
+            menu();
+          } 
+       }
+      else 
+       {
+        system("cls");
+        menu();
+       } 
+    }
+  else if(mainChoice==5)
+   {
+    cout<<"--GOOD-BYE--" <<endl;
+    Sleep(999);
+    system("cls");
+    menu();
+   } 
+  else   
+   {
+    cout<<"Invalid Input! Redirecting to Previous Menu \nPlease Wait!" <<endl;
+    Sleep(1100);
+    system("cls");
+    menu();
+   }
+ }
 //******************************MAIN********************************
 main()
 {
+  ManageMenu startObj;
   return 0;
 }
